@@ -1,0 +1,94 @@
+<div class="login-page" [@routerTransition]>
+    <div class="row justify-content-md-center">
+
+            <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <img src="../../nbse-result/assets/images/logo.png" />
+                        </div>
+                        <div class="col-12">
+                            <div class="resultHead">
+                                <h2>NBSE RESULTS</h2>
+                            </div><br>
+                            <p style="text-align: center;">
+                              <a href="https://www.nbse.org.in" target="_blank">Home</a>
+                            </p>
+                            <div id="custom-search-input">
+                                <form #stuRollForm="ngForm" (ngSubmit)="stuRollForm.form.valid && getStudentResult(stuRollForm)">
+                                        <div class="input-group mb-3">
+                                                <input type="text" class="form-control"  
+                                                name="rollNo"
+                                                #rollNo="ngModel"
+                                                [(ngModel)]="model.rollNo"
+                                                placeholder="Enter Roll Number" required />
+                                                <input type="text" class="form-control"  
+                                                  name="schoolCode"
+                                                  #schoolCode="ngModel"
+                                                  [(ngModel)]="model.schoolCode"
+                                                  placeholder="Enter School Code" required />
+                                            <div class="input-group-append">
+                                                <button class="btn btn-primary" [disabled]="!stuRollForm.form.valid" type="submit">Show Result</button>
+                                            </div>
+                                            </div>
+                                  </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="alert alert-danger"  *ngIf="error">
+                  <strong>Sorry!</strong> Roll Number does not exist. Please contact your school.
+                </div>
+                <div class="container" *ngIf="showStudentInfo" >
+                        <h4>STUDENT RESULT</h4>
+                        <table class="table table-bordered" style="width: 70%; margin-left: 15%;">
+                          <thead>
+                            <tr>
+                              <th width="30%" class="upperTH">Roll No:</th>
+                              <td width="70%" class="upperTH">{{studentInfo[0].ROLL_NO}}</td>
+                            </tr>
+                            <tr>
+                              <th class="upperTH">Student Name:</th>
+                              <td class="upperTH">{{studentInfo[0].STUDENT_NAME}}</td>
+                            </tr>
+                            <tr>
+                              <th class="upperTH">Class:</th>
+                              <td class="upperTH">{{studentInfo[0].CLASS_ID}}</td>
+                            </tr>
+                            <tr>
+                              <th class="upperTH">School Code:</th>
+                              <td class="upperTH">{{studentInfo[0].SCHOOL_ID}}</td>
+                            </tr>
+                          </thead>
+                        </table>
+                        <table class="table table-bordered" style="width: 70%; margin-left: 15%;">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">Sr No.</th>
+                                    <th scope="col">Subject ID</th>
+                                    <th scope="col">Subject Name</th>
+                                    <th scope="col">Marks Obtained</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let items of studentSubList; let i=index" >
+                                    <th scope="row">{{i+1}}</th>
+                                    <td>{{items.subject_id}}</td>
+                                    <td>{{items.subjectName}}</td>
+                                    <td>{{items.marks_received == null?'In-Progress':items.marks_received==-1?'Absent':items.marks_received == -2?'NDA':items.marks_received}}</td>
+                                  </tr>
+                                </tbody>
+                            </table>
+                      </div>
+    </div>
+
+    <ngx-spinner
+    bdOpacity = 1
+    bdColor = "rgba(4,4,4,0.43)"
+    size = "medium"
+    color = "#fff"
+    type = "ball-fall"
+    [fullScreen] = "true">
+    <p style="color: white;font-weight: 700;"> Please Wait... </p>
+</ngx-spinner>
+
+</div>

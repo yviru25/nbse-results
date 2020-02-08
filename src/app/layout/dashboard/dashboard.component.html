@@ -1,0 +1,136 @@
+<div [@routerTransition]>
+        <form class="form-control">
+            <input class="form-control" (keyup)="applyFilter($event.target.value)" placeholder="Search by all column" />
+        </form>
+    <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+  <ng-container matColumnDef="ROLL_NO">
+    <th style="width: 25%;" mat-header-cell *matHeaderCellDef> Roll No 
+      <!--  <form class="form">
+            <input (keyup)="applyFilterRollNo($event.target.value)" placeholder="Search By Roll No" />
+        </form>     -->
+    </th>
+    <td mat-cell *matCellDef="let element">
+        <a href="javascript:void(0)" style="text-decoration: underline;">{{element.ROLL_NO}}</a>
+    </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="STUDENT_NAME">
+    <th mat-header-cell *matHeaderCellDef> Student Name 
+       <!--  <form class="form">
+            <input (keyup)="applyFilter($event.target.value)" placeholder="Search By Student" />
+        </form> -->
+    </th>
+    <td mat-cell *matCellDef="let element"> {{element.STUDENT_NAME}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="CLASS">
+    <th mat-header-cell *matHeaderCellDef> Class 
+      <!--   <form class="form">
+            <input (keyup)="applyFilter($event.target.value)" placeholder="Search By Class" />
+        </form> -->
+    </th>
+    <td mat-cell *matCellDef="let element"> {{element.CLASS}} </td>
+  </ng-container>
+  <ng-container matColumnDef="NLE_QUALIFIED">
+    <th mat-header-cell *matHeaderCellDef> NLE Qualified 
+    </th>
+    <td mat-cell *matCellDef="let element"> {{element.NLE_QUALIFIED}} </td>
+  </ng-container>
+
+  <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+  <ng-container matColumnDef="expandedDetail">
+    <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+      <div class="example-element-detail"
+           [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+        
+        
+           <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">SNo</th>
+                <th scope="col">Subject Name</th>
+                <th scope="col">Marks Obtained</th>
+                <th scope="col">Rank</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>{{element.SUB1}}</td>
+                <td>{{element.SUB1_MARKS}}</td>
+                <td>{{element.SUB1_RANK}}</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>{{element.SUB2}}</td>
+                <td>{{element.SUB2_MARKS}}</td>
+                <td>{{element.SUB2_RANK}}</td>
+              </tr>
+              <tr>
+                    <td>3</td>
+                <td>{{element.SUB3}}</td>
+                <td>{{element.SUB3_MARKS}}</td>
+                <td>{{element.SUB3_RANK}}</td>
+              </tr>
+              <tr>
+                    <td>4</td>
+                <td>{{element.SUB4}}</td>
+                <td>{{element.SUB4_MARKS}}</td>
+                <td>{{element.SUB4_RANK}}</td>
+              </tr>
+              <tr>
+                    <td>5</td>
+                <td>{{element.SUB5}}</td>
+                <td>{{element.SUB5_MARKS}}</td>
+                <td>{{element.SUB5_RANK}}</td>
+              </tr>
+              <tr>
+                    <td>6</td>
+                <td>{{element.SUB6}}</td>
+                <td>{{element.SUB6_MARKS}}</td>
+                <td>{{element.SUB6_RANK}}</td>
+              </tr>
+              <tr>
+                    <td>7</td>
+                <td>{{element.SUB7}}</td>
+                <td>{{element.SUB7_MARKS}}</td>
+                <td>{{element.SUB7_RANK}}</td>
+              </tr>
+              <tr>
+                    <td>8</td>
+                <td>{{element.SUB8}}</td>
+                <td>{{element.SUB8_MARKS}}</td>
+                <td>{{element.SUB8_RANK}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+      </div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+  <tr class="element-row"  mat-row *matRowDef="let element; columns: columnsToDisplay;"
+      class="example-element-row"
+      [class.example-expanded-row]="expandedElement === element"
+      (click)="expandedElement = element">
+  </tr>
+  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+</table>
+<mat-paginator
+[pageSize]="10"
+[pageSizeOptions]="[5, 10, 25, 100]">
+</mat-paginator>
+
+<ngx-spinner
+    bdOpacity = 1
+    bdColor = "rgba(4,4,4,0.43)"
+    size = "medium"
+    color = "#fff"
+    type = "ball-fall"
+    [fullScreen] = "true">
+    <p style="color: white;font-weight: 700;"> Please Wait... </p>
+</ngx-spinner>
+
+</div>

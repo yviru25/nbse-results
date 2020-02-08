@@ -1,0 +1,33 @@
+// shared css for the login and signup page
+.container{
+    text-align: center;
+}
+.resultHead{
+    margin-top: 50px;
+}
+#custom-search-input {
+    margin:0;
+    margin-top: 50px;
+    padding: 0;
+    margin-left: 28%;
+}
+.input-group {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap; // For form validation feedback
+    align-items: stretch;
+    width: 60% !important;
+}
+ 
+.search-query:focus{
+    z-index: 0;   
+}
+.table th, .table td{
+    padding: 0.25rem; 
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+.upperTH {
+    text-align: left;
+    margin-left: 10px;
+}
